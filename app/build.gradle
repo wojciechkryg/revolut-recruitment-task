@@ -1,18 +1,19 @@
+import com.wojdor.buildsrc.Application
+import com.wojdor.buildsrc.Library
+
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion compile_sdk_version
-    buildToolsVersion build_tools_version
+    compileSdkVersion Application.compileSdk
+    buildToolsVersion Application.buildTools
     defaultConfig {
-        applicationId application_id
-        minSdkVersion min_sdk_version
-        targetSdkVersion target_sdk_version
-        versionCode version_code
-        versionName version_name
+        applicationId Application.id
+        minSdkVersion Application.minSdk
+        targetSdkVersion Application.targetSdk
+        versionCode Application.versionCode
+        versionName Application.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,9 +26,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    testImplementation "junit:junit:$junit_version"
+    implementation Library.kotlin
+    implementation Library.Android.appcompat
+    implementation Library.Android.core
+    implementation Library.Android.constraintLayout
+    testImplementation Library.Test.junit
 }
