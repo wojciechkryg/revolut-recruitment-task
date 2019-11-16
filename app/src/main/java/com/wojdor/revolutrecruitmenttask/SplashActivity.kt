@@ -1,12 +1,12 @@
 package com.wojdor.revolutrecruitmenttask
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wojdor.common_android.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash)
     }
 }

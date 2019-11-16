@@ -32,3 +32,10 @@ object Library {
 
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
 }
+
+object Module {
+    val app = ":app"
+    val buildSrc = ":buildSrc"
+    val common = ":common"
+    val commonAndroid = ":common_android"
+}
