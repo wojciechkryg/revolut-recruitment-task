@@ -16,7 +16,7 @@ object Version {
     val core = "1.1.0"
     val gradle = "3.5.2"
     val junit = "4.12"
-    val kotlin = "1.3.50"
+    val kotlin = "1.3.60"
 }
 
 object Library {
@@ -38,4 +38,9 @@ object Module {
     val buildSrc = ":buildSrc"
     val common = ":common"
     val commonAndroid = ":common_android"
+    val data = ":data"
+    val domain = ":domain"
+    val featureRates = ":feature_rates"
+    val network = ":network"
+    val repositoryRates = ":repository_rates"
 }

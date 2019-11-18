@@ -1,3 +1,4 @@
+import com.wojdor.buildsrc.Module
 import com.wojdor.buildsrc.Version
 import com.wojdor.buildsrc.Library
 
@@ -8,6 +9,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Library.kotlin
     testImplementation Library.Test.junit
+    implementation project(path: Module.common)
+    implementation project(path: Module.data)
 }
 
 sourceCompatibility = "7"
