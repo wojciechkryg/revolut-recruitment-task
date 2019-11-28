@@ -35,4 +35,5 @@ dependencies {
     testImplementation Library.Test.junit
     implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)
+    implementation project(path: Module.featureRates)
 }
