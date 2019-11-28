@@ -1,4 +1,13 @@
 import com.wojdor.buildsrc.Module
 
-include Module.app, Module.buildSrc, Module.common, Module.commonAndroid, Module.data, Module.domain, Module.featureRates, Module.network, Module.repositoryRates
+include Module.app
+include Module.buildSrc
+include Module.common
+include Module.commonAndroid
+include Module.data
+include Module.domain
+include Module.featureRates
+include Module.network
+include Module.repositoryRates
+include Module.usecaseRates
 rootProject.name = 'Revolut Recruitment Task'

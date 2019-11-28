@@ -1,12 +1,13 @@
-package com.wojdor.feature_rates
+package com.wojdor.revolutrecruitmenttask.splash
 
 import android.os.Bundle
 import com.wojdor.common_android.base.BaseActivity
+import com.wojdor.revolutrecruitmenttask.R
 
-class RatesActivity : BaseActivity() {
+class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rates)
+        setContentView(R.layout.activity_splash)
     }
 }

@@ -1,3 +1,4 @@
+import com.wojdor.buildsrc.Module
 import com.wojdor.buildsrc.Version
 import com.wojdor.buildsrc.Library
 
@@ -7,6 +8,9 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Library.kotlin
+    implementation Library.retrofit
+    implementation Library.retrofitGson
+    implementation Library.retrofitRxJava
     testImplementation Library.Test.junit
 }
 

@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Library.koin
     implementation Library.kotlin
     implementation Library.Android.appcompat
     implementation Library.Android.core

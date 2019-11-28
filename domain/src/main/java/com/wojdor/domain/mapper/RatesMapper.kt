@@ -6,7 +6,7 @@ import com.wojdor.data.RatesDto
 import com.wojdor.domain.Rates
 import com.wojdor.domain.enums.Currency
 
-object CurrencyMapper {
+object RatesMapper {
 
     private const val DEFAULT_BASE_RATE = 1.0
 

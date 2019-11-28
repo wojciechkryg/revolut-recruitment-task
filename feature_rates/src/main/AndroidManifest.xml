@@ -2,6 +2,6 @@
     package="com.wojdor.feature_rates" >
 
     <application>
-        <activity android:name=".RatesActivity" />
+        <activity android:name=".view.RatesActivity" />
     </application>
 </manifest>
