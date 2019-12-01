@@ -11,6 +11,7 @@ dependencies {
     implementation Library.retrofit
     implementation Library.rxKotlin
     testImplementation Library.Test.junit
+    implementation project(path: Module.data)
     implementation project(path: Module.domain)
 }
 

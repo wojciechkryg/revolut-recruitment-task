@@ -4,7 +4,7 @@ import com.wojdor.common.extension.empty
 import com.wojdor.data.RatesDto
 import com.wojdor.domain.enums.Currency
 import com.wojdor.domain.mapper.RatesMapper
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class RatesMapperTest {
@@ -13,16 +13,16 @@ class RatesMapperTest {
     fun `When RatesDto is null then should return empty Rates`() {
         val ratesDto = null
         val rates = RatesMapper.map(ratesDto)
-        Assert.assertEquals(String.empty, rates.date)
-        Assert.assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(String.empty, rates.date)
+        assertEquals(emptyMap<Currency, Double>(), rates.rates)
     }
 
     @Test
     fun `When RatesDto fields are null then should return default values`() {
         val ratesDto = RatesDto(null, null, null)
         val rates = RatesMapper.map(ratesDto)
-        Assert.assertEquals(String.empty, rates.date)
-        Assert.assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(String.empty, rates.date)
+        assertEquals(emptyMap<Currency, Double>(), rates.rates)
     }
 
     @Test
@@ -32,7 +32,7 @@ class RatesMapperTest {
         }
         val ratesDto = RatesDto(null, null, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
-        Assert.assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(emptyMap<Currency, Double>(), rates.rates)
     }
 
     @Test
@@ -47,8 +47,8 @@ class RatesMapperTest {
             put(Currency.EUR, 1.0)
             put(Currency.USD, 1.234)
         }
-        Assert.assertEquals(mockDate, rates.date)
-        Assert.assertEquals(expectedCurrencyMap, rates.rates)
+        assertEquals(mockDate, rates.date)
+        assertEquals(expectedCurrencyMap, rates.rates)
     }
 
     @Test
@@ -63,6 +63,6 @@ class RatesMapperTest {
         val expectedCurrencyMap = mutableMapOf<Currency, Double>().apply {
             put(Currency.USD, 1.234)
         }
-        Assert.assertEquals(expectedCurrencyMap, rates.rates)
+        assertEquals(expectedCurrencyMap, rates.rates)
     }
 }

@@ -18,6 +18,7 @@ object Version {
     val junit = "4.12"
     val koin = "2.0.1"
     val kotlin = "1.3.60"
+    val mockk = "1.9.3"
     val retrofit = "2.6.2"
     val rxKotlin = "2.4.0"
 }
@@ -32,6 +33,7 @@ object Library {
 
     object Test {
         val junit = "junit:junit:${Version.junit}"
+        val mockk = "io.mockk:mockk:${Version.mockk}"
     }
 
     val koin = "org.koin:koin-android:${Version.koin}"

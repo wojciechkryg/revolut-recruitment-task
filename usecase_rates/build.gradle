@@ -1,4 +1,5 @@
 import com.wojdor.buildsrc.Library
+import com.wojdor.buildsrc.Module
 import com.wojdor.buildsrc.Version
 
 apply plugin: 'java-library'
@@ -7,7 +8,12 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Library.kotlin
+    implementation Library.rxKotlin
     testImplementation Library.Test.junit
+    testImplementation Library.Test.mockk
+    implementation project(path: Module.common)
+    implementation project(path: Module.domain)
+    implementation project(path: Module.repositoryRates)
 }
 
 sourceCompatibility = "7"

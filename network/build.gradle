@@ -1,6 +1,5 @@
-import com.wojdor.buildsrc.Module
-import com.wojdor.buildsrc.Version
 import com.wojdor.buildsrc.Library
+import com.wojdor.buildsrc.Version
 
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
