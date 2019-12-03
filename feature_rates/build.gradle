@@ -27,13 +27,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Library.kotlin
     implementation Library.Android.appcompat
     implementation Library.Android.core
+    implementation Library.Android.constraintLayout
+    implementation Library.koin
+    implementation Library.kotlin
+    implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)
+    implementation project(path: Module.usecaseRates)
 }

@@ -27,11 +27,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Library.koin
-    implementation Library.kotlin
     implementation Library.Android.appcompat
     implementation Library.Android.core
-    implementation Library.Android.constraintLayout
+    implementation Library.koin
+    implementation Library.kotlin
     testImplementation Library.Test.junit
     implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)

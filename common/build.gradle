@@ -7,6 +7,7 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Library.kotlin
+    implementation Library.rxKotlin
     testImplementation Library.Test.junit
 }
 
