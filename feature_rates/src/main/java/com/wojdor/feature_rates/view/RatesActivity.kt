@@ -19,7 +19,11 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
         title = getString(R.string.rates)
     }
 
-    override fun showRates(rates: List<Rates>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showRates(rates: Rates) {
+        // TODO: Show rates
+    }
+
+    override fun showFetchRatesError(error: Throwable) {
+        // TODO: Show error
     }
 }

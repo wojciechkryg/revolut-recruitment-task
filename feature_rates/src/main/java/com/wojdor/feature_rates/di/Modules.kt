@@ -37,11 +37,11 @@ private val dataModules = module {
 }
 
 private val usecaseModules = module {
-    single { RatesUsecase(get()) }
+    single<BaseRatesUsecase> { RatesUsecase(get()) }
 }
 
 private val presenterModules = module {
-    single { RatesPresenter(get()) }
+    single<RatesContract.Presenter> { RatesPresenter(get()) }
 }
 
 val featureRatesModules = listOf(networkModules, dataModules, usecaseModules, presenterModules)

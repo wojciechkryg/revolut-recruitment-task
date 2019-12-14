@@ -7,10 +7,12 @@ import com.wojdor.usecase_rates.BaseRatesUsecase
 interface RatesContract {
 
     interface View : BaseContract.View {
-        fun showRates(rates: List<Rates>)
+        fun showRates(rates: Rates)
+        fun showFetchRatesError(error: Throwable)
     }
 
     interface Presenter : BaseContract.Presenter<View> {
         val ratesUsecase: BaseRatesUsecase
+        fun fetchRates()
     }
 }

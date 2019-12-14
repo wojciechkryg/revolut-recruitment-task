@@ -10,7 +10,7 @@ interface BaseContract {
 
         val compositeDisposable: CompositeDisposable
         var view: V?
-        fun attachView(view: V)
-        fun detachView()
+        fun onAttachView(view: V)
+        fun onDetachView()
     }
 }

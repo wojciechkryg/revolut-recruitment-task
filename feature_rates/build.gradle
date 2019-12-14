@@ -50,6 +50,8 @@ dependencies {
     implementation Library.Android.constraintLayout
     implementation Library.koin
     implementation Library.kotlin
+    implementation Library.rxAndroid
+    implementation Library.rxKotlin
     implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)
     implementation project(path: Module.config)

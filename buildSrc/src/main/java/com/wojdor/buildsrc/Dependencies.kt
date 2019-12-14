@@ -20,6 +20,7 @@ object Version {
     val kotlin = "1.3.60"
     val mockk = "1.9.3"
     val retrofit = "2.6.2"
+    val rxAndroid = "2.1.1"
     val rxKotlin = "2.4.0"
 }
 
@@ -41,6 +42,7 @@ object Library {
     val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
     val retrofitGson = "com.squareup.retrofit2:converter-gson:${Version.retrofit}"
     val retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+    val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Version.rxAndroid}"
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Version.rxKotlin}"
 }
 

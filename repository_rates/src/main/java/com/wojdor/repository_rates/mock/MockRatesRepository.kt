@@ -12,7 +12,7 @@ class MockRatesRepository : BaseRatesRepository {
     private val mockMap by lazy {
         mutableMapOf<Currency, Double>().apply {
             Currency.values().forEach {
-                put(it, Random.Default.nextDouble(0.1, 3.0))
+                put(it, Random.nextDouble(0.1, 3.0))
             }
         }
     }
