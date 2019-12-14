@@ -53,6 +53,7 @@ dependencies {
     implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)
     implementation project(path: Module.config)
+    implementation project(path: Module.domain)
     implementation project(path: Module.network)
     implementation project(path: Module.repositoryRates)
     implementation project(path: Module.usecaseRates)
