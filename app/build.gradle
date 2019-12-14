@@ -1,6 +1,4 @@
-import com.wojdor.buildsrc.Application
-import com.wojdor.buildsrc.Library
-import com.wojdor.buildsrc.Module
+import com.wojdor.buildsrc.*
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -21,6 +19,29 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions Dimension.dataSource
+    productFlavors {
+        dataMock {
+            applicationIdSuffix = Suffix.mock
+            versionNameSuffix = Suffix.mock
+            dimension Dimension.dataSource
+        }
+        dataDevelop {
+            applicationIdSuffix = Suffix.develop
+            versionNameSuffix = Suffix.develop
+            dimension Dimension.dataSource
+        }
+        dataTest {
+            applicationIdSuffix = Suffix.test
+            versionNameSuffix = Suffix.test
+            dimension Dimension.dataSource
+        }
+        dataProduction {
+            applicationIdSuffix = Suffix.production
+            versionNameSuffix = Suffix.production
+            dimension Dimension.dataSource
         }
     }
 }

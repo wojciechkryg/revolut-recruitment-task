@@ -1,6 +1,8 @@
 import com.wojdor.buildsrc.Application
+import com.wojdor.buildsrc.Dimension
 import com.wojdor.buildsrc.Library
 import com.wojdor.buildsrc.Module
+import com.wojdor.buildsrc.Suffix
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -9,8 +11,6 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion Application.compileSdk
     buildToolsVersion Application.buildTools
-
-
     defaultConfig {
         minSdkVersion Application.minSdk
         targetSdkVersion Application.targetSdk
@@ -20,11 +20,25 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions Dimension.dataSource
+    productFlavors {
+        dataMock {
+            dimension Dimension.dataSource
+        }
+        dataDevelop {
+            dimension Dimension.dataSource
+        }
+        dataTest {
+            dimension Dimension.dataSource
+        }
+        dataProduction {
+            dimension Dimension.dataSource
         }
     }
 }
@@ -38,5 +52,8 @@ dependencies {
     implementation Library.kotlin
     implementation project(path: Module.common)
     implementation project(path: Module.commonAndroid)
+    implementation project(path: Module.config)
+    implementation project(path: Module.network)
+    implementation project(path: Module.repositoryRates)
     implementation project(path: Module.usecaseRates)
 }

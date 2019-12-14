@@ -4,6 +4,7 @@ include Module.app
 include Module.buildSrc
 include Module.common
 include Module.commonAndroid
+include Module.config
 include Module.data
 include Module.domain
 include Module.featureRates

@@ -49,6 +49,7 @@ object Module {
     val buildSrc = ":buildSrc"
     val common = ":common"
     val commonAndroid = ":common_android"
+    val config = ":config"
     val data = ":data"
     val domain = ":domain"
     val featureRates = ":feature_rates"
