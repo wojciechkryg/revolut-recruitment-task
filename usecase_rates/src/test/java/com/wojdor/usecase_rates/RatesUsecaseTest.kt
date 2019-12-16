@@ -1,6 +1,7 @@
 package com.wojdor.usecase_rates
 
 import com.wojdor.common.extension.empty
+import com.wojdor.domain.Rate
 import com.wojdor.domain.Rates
 import com.wojdor.domain.enums.Currency
 import com.wojdor.repository_rates.BaseRatesRepository
@@ -13,12 +14,12 @@ import org.junit.Test
 class RatesUsecaseTest {
 
     private val mockRatesRepository by lazy { spyk<BaseRatesRepository>() }
-    private val mockEmptyRates by lazy { Rates(String.empty, emptyMap()) }
+    private val mockEmptyRates by lazy { Rates(String.empty, emptyList()) }
     private val mockDate by lazy { "2018-09-06" }
     private val mockRates by lazy {
-        Rates(mockDate, mutableMapOf<Currency, Double>().apply {
+        Rates(mockDate, mutableListOf<Rate>().apply {
             Currency.values().forEachIndexed { index, currency ->
-                put(currency, index.toDouble())
+                add(Rate(currency, index.toDouble()))
             }
         })
     }
@@ -36,8 +37,8 @@ class RatesUsecaseTest {
         val usecaseResult = RatesUsecase(mockRatesRepository).getRatesWithInterval().blockingFirst()
         assert(usecaseResult.rates.isNotEmpty())
         assertEquals(mockDate, usecaseResult.date)
-        Currency.values().forEach {
-            assert(usecaseResult.rates.contains(it))
+        Currency.values().forEach { currency ->
+            assert(usecaseResult.rates.any { it.currency == currency })
         }
     }
 }

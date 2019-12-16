@@ -20,6 +20,7 @@ object Version {
     val kotlin = "1.3.60"
     val mockk = "1.9.3"
     val retrofit = "2.6.2"
+    val recyclerView = "1.1.0"
     val rxAndroid = "2.1.1"
     val rxKotlin = "2.4.0"
 }
@@ -30,6 +31,7 @@ object Library {
         val core = "androidx.core:core-ktx:${Version.core}"
         val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
+        val recyclerView = "androidx.recyclerview:recyclerview:${Version.recyclerView}"
     }
 
     object Test {

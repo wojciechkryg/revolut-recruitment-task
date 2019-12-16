@@ -14,7 +14,7 @@ class RatesMapperTest {
         val ratesDto = null
         val rates = RatesMapper.map(ratesDto)
         assertEquals(String.empty, rates.date)
-        assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(emptyList<Rate>(), rates.rates)
     }
 
     @Test
@@ -22,7 +22,7 @@ class RatesMapperTest {
         val ratesDto = RatesDto(null, null, null)
         val rates = RatesMapper.map(ratesDto)
         assertEquals(String.empty, rates.date)
-        assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(emptyList<Rate>(), rates.rates)
     }
 
     @Test
@@ -32,7 +32,7 @@ class RatesMapperTest {
         }
         val ratesDto = RatesDto(null, null, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
-        assertEquals(emptyMap<Currency, Double>(), rates.rates)
+        assertEquals(emptyList<Rate>(), rates.rates)
     }
 
     @Test
@@ -43,12 +43,12 @@ class RatesMapperTest {
         val mockDate = "2018-09-06"
         val ratesDto = RatesDto("EUR", mockDate, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
-        val expectedCurrencyMap = mutableMapOf<Currency, Double>().apply {
-            put(Currency.EUR, 1.0)
-            put(Currency.USD, 1.234)
+        val expectedRatesList = mutableListOf<Rate>().apply {
+            add(Rate(Currency.EUR, 1.0))
+            add(Rate(Currency.USD, 1.234))
         }
         assertEquals(mockDate, rates.date)
-        assertEquals(expectedCurrencyMap, rates.rates)
+        assertEquals(expectedRatesList, rates.rates)
     }
 
     @Test
@@ -60,9 +60,9 @@ class RatesMapperTest {
         }
         val ratesDto = RatesDto("BLE", null, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
-        val expectedCurrencyMap = mutableMapOf<Currency, Double>().apply {
-            put(Currency.USD, 1.234)
+        val expectedRatesList = mutableListOf<Rate>().apply {
+            add(Rate(Currency.USD, 1.234))
         }
-        assertEquals(expectedCurrencyMap, rates.rates)
+        assertEquals(expectedRatesList, rates.rates)
     }
 }

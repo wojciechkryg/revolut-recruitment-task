@@ -48,6 +48,7 @@ dependencies {
     implementation Library.Android.appcompat
     implementation Library.Android.core
     implementation Library.Android.constraintLayout
+    implementation Library.Android.recyclerView
     implementation Library.koin
     implementation Library.kotlin
     implementation Library.rxAndroid

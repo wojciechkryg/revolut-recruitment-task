@@ -12,15 +12,21 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
 
     override val view = this
     override val presenter: RatesContract.Presenter by inject()
+    lateinit var adapter: RatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rates)
         title = getString(R.string.rates)
+        setupRatesList()
+    }
+
+    private fun setupRatesList() {
+        adapter = RatesAdapter()
     }
 
     override fun showRates(rates: Rates) {
-        // TODO: Show rates
+        adapter.showRates(rates.rates)
     }
 
     override fun showFetchRatesError(error: Throwable) {
