@@ -1,6 +1,5 @@
 package com.wojdor.common_android.base
 
-import android.os.Bundle
 import com.wojdor.common.base.BaseContract
 
 abstract class BaseMvpActivity<V : BaseContract.View, P : BaseContract.Presenter<V>> :
@@ -9,8 +8,8 @@ abstract class BaseMvpActivity<V : BaseContract.View, P : BaseContract.Presenter
     protected abstract val presenter: P
     protected abstract val view: V
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         presenter.onAttachView(view)
     }
 

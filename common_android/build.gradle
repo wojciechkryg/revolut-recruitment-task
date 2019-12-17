@@ -34,8 +34,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Library.Android.appcompat
     implementation Library.Android.core
+    implementation Library.Android.recyclerView
     implementation Library.kotlin
     testImplementation Library.Test.junit
     implementation project(path: Module.common)
+    implementation project(path: Module.domain)
 
 }

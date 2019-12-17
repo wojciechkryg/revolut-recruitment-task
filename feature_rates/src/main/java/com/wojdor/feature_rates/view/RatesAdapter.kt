@@ -1,26 +1,32 @@
 package com.wojdor.feature_rates.view
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.wojdor.common_android.extension.inflate
 import com.wojdor.domain.Rate
+import com.wojdor.feature_rates.R
 
-class RatesAdapter : RecyclerView.Adapter<RatesViewHolder>() {
 
-    private val items = emptyList<Rate>()
+class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RatesViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private val items = mutableListOf<Rate>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {
+        val view = parent.inflate(R.layout.item_rate)
+        return RateViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: RatesViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(holder: RateViewHolder, position: Int) {
+        holder.onBind(items[position])
     }
 
     fun showRates(rates: List<Rate>) {
-        // TODO: Add rates and refresh view with DiffUtil
+        val diffResult = DiffUtil.calculateDiff(RatesDiffUtilCallback(items, rates))
+        items.clear()
+        items.addAll(rates)
+        diffResult.dispatchUpdatesTo(this)
     }
 }

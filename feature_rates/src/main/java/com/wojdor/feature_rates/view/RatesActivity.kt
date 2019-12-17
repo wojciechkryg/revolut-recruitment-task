@@ -1,10 +1,12 @@
 package com.wojdor.feature_rates.view
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wojdor.common_android.base.BaseMvpActivity
 import com.wojdor.domain.Rates
 import com.wojdor.feature_rates.R
 import com.wojdor.feature_rates.RatesContract
+import kotlinx.android.synthetic.main.activity_rates.*
 import org.koin.android.ext.android.inject
 
 class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presenter>(),
@@ -12,7 +14,7 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
 
     override val view = this
     override val presenter: RatesContract.Presenter by inject()
-    lateinit var adapter: RatesAdapter
+    private lateinit var ratesAdapter: RatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +24,15 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
     }
 
     private fun setupRatesList() {
-        adapter = RatesAdapter()
+        ratesAdapter = RatesAdapter()
+        with(ratesRatesRv) {
+            layoutManager = LinearLayoutManager(this@RatesActivity)
+            adapter = ratesAdapter
+        }
     }
 
     override fun showRates(rates: Rates) {
-        adapter.showRates(rates.rates)
+        ratesAdapter.showRates(rates.rates)
     }
 
     override fun showFetchRatesError(error: Throwable) {
