@@ -16,4 +16,9 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_australia" />
 
+    <TextView
+        android:id="@+id/itemRateCurrencyRateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/itemRateCurrencyFlagIv" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import com.wojdor.domain.enums.Currency
 import com.wojdor.domain.mapper.RatesMapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.math.BigDecimal
 
 class RatesMapperTest {
 
@@ -44,8 +45,8 @@ class RatesMapperTest {
         val ratesDto = RatesDto("EUR", mockDate, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
         val expectedRatesList = mutableListOf<Rate>().apply {
-            add(Rate(Currency.EUR, 1.0))
-            add(Rate(Currency.USD, 1.234))
+            add(Rate(Currency.EUR, BigDecimal.ONE))
+            add(Rate(Currency.USD, BigDecimal(1.234)))
         }
         assertEquals(mockDate, rates.date)
         assertEquals(expectedRatesList, rates.rates)
@@ -61,7 +62,7 @@ class RatesMapperTest {
         val ratesDto = RatesDto("BLE", null, mockedCurrencyMap)
         val rates = RatesMapper.map(ratesDto)
         val expectedRatesList = mutableListOf<Rate>().apply {
-            add(Rate(Currency.USD, 1.234))
+            add(Rate(Currency.USD, BigDecimal(1.234)))
         }
         assertEquals(expectedRatesList, rates.rates)
     }

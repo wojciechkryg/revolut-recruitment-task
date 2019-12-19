@@ -23,10 +23,21 @@ class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
         holder.onBind(items[position])
     }
 
+    override fun onBindViewHolder(
+        holder: RateViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        when {
+            payloads.isEmpty() -> super.onBindViewHolder(holder, position, payloads)
+            else -> holder.onUpdate(payloads)
+        }
+    }
+
     fun showRates(rates: List<Rate>) {
         val diffResult = DiffUtil.calculateDiff(RatesDiffUtilCallback(items, rates))
+        diffResult.dispatchUpdatesTo(this)
         items.clear()
         items.addAll(rates)
-        diffResult.dispatchUpdatesTo(this)
     }
 }

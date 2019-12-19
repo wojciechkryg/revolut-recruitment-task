@@ -6,10 +6,11 @@ import com.wojdor.data.RatesDto
 import com.wojdor.domain.Rate
 import com.wojdor.domain.Rates
 import com.wojdor.domain.enums.Currency
+import java.math.BigDecimal
 
 object RatesMapper {
 
-    private const val DEFAULT_BASE_RATE = 1.0
+    private val DEFAULT_BASE_RATE by lazy { BigDecimal.ONE }
 
     fun map(ratesDto: RatesDto?) = Rates(
         ratesDto?.date ?: String.empty,
@@ -24,7 +25,7 @@ object RatesMapper {
             ratesDto.rates?.forEach {
                 val key = enumValueOrNull<Currency>(it.key ?: return@forEach) ?: return@forEach
                 val value = it.value ?: return@forEach
-                add(Rate(key, value))
+                add(Rate(key, BigDecimal(value)))
             }
         }
     }

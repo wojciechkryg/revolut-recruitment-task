@@ -10,6 +10,7 @@ import io.mockk.spyk
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.math.BigDecimal
 
 class RatesUsecaseTest {
 
@@ -19,7 +20,7 @@ class RatesUsecaseTest {
     private val mockRates by lazy {
         Rates(mockDate, mutableListOf<Rate>().apply {
             Currency.values().forEachIndexed { index, currency ->
-                add(Rate(currency, index.toDouble()))
+                add(Rate(currency, BigDecimal(index)))
             }
         })
     }

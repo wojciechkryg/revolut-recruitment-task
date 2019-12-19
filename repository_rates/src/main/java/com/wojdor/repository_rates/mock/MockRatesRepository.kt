@@ -5,6 +5,7 @@ import com.wojdor.domain.Rates
 import com.wojdor.domain.enums.Currency
 import com.wojdor.repository_rates.BaseRatesRepository
 import io.reactivex.Single
+import java.math.BigDecimal
 import kotlin.random.Random
 
 class MockRatesRepository : BaseRatesRepository {
@@ -13,7 +14,7 @@ class MockRatesRepository : BaseRatesRepository {
     private val mockList by lazy {
         mutableListOf<Rate>().apply {
             Currency.values().forEach {
-                add(Rate(it, Random.nextDouble(0.1, 3.0)))
+                add(Rate(it, BigDecimal(Random.nextDouble(0.1, 3.0))))
             }
         }
     }
