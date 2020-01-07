@@ -2,6 +2,7 @@ package com.wojdor.feature_rates.view
 
 import android.os.Bundle
 import android.view.View
+import com.wojdor.common.extension.formatToTwoDecimalPlacesIfExist
 import com.wojdor.common_android.base.BaseViewHolder
 import com.wojdor.common_android.util.CurrencyRescources
 import com.wojdor.domain.Rate
@@ -21,8 +22,7 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
     }
 
     private fun setRate(rate: BigDecimal) {
-        // TODO: Create formatter for 2 decimal places only
-        itemView.itemRateCurrencyRateTv.text = "$rate"
+        itemView.itemRateCurrencyRateTv.text = rate.formatToTwoDecimalPlacesIfExist()
     }
 
     override fun onUpdate(bundle: Bundle) {

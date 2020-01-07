@@ -1,6 +1,5 @@
-package com.wojdor.common.extension
+package com.wojdor.common.util
 
-import com.wojdor.common.util.enumValueOrNull
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
