@@ -14,7 +14,14 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
 
     override fun onBind(model: Rate) {
         setCurrencyIcon(model.currency)
+        setCurrencyLabels(model.currency)
         setRate(model.rate)
+    }
+
+    private fun setCurrencyLabels(currency: Currency) {
+        itemView.itemRateCurrencyTv.text = currency.name
+        // TODO: Set currency name
+        itemView.itemRateCurrencyNameTv.text = currency.name
     }
 
     private fun setCurrencyIcon(currency: Currency) {

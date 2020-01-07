@@ -14,11 +14,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_australia" />
+        tools:src="@drawable/ic_european_union" />
+
+    <TextView
+        android:id="@+id/itemRateCurrencyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin16"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text16"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/itemRateCurrencyNameTv"
+        app:layout_constraintStart_toEndOf="@id/itemRateCurrencyFlagIv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="EUR" />
+
+    <TextView
+        android:id="@+id/itemRateCurrencyNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/itemRateCurrencyTv"
+        app:layout_constraintTop_toBottomOf="@id/itemRateCurrencyTv"
+        tools:text="Euro" />
 
     <TextView
         android:id="@+id/itemRateCurrencyRateTv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toEndOf="@id/itemRateCurrencyFlagIv" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
