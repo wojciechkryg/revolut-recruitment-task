@@ -1,4 +1,5 @@
 <resources>
     <string name="rates">Rates</string>
     <string name="currency_icon_description">Currency flag</string>
+    <string name="currency_rate_hint">0</string>
 </resources>

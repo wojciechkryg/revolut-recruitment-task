@@ -28,7 +28,7 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
     }
 
     private fun setRate(rate: BigDecimal) {
-        itemView.itemRateCurrencyRateTv.text = rate.formatToTwoDecimalPlacesIfExist()
+        itemView.itemRateCurrencyRateEt.setText(rate.formatToTwoDecimalPlacesIfExist())
     }
 
     override fun onUpdate(bundle: Bundle) {

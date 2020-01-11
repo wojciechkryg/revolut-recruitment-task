@@ -33,17 +33,43 @@
         android:id="@+id/itemRateCurrencyNameTv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/margin16"
+        android:ellipsize="end"
+        android:textColor="@color/grey"
         android:textSize="@dimen/text14"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/itemRateCurrencyGuideline"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/itemRateCurrencyTv"
         app:layout_constraintTop_toBottomOf="@id/itemRateCurrencyTv"
         tools:text="Euro" />
 
-    <TextView
-        android:id="@+id/itemRateCurrencyRateTv"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/itemRateCurrencyGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <EditText
+        android:id="@+id/itemRateCurrencyRateEt"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:gravity="end"
+        android:hint="@string/currency_rate_hint"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:digits="0123456789,."
+        android:maxLength="9"
+        android:labelFor="@id/itemRateCurrencyNameTv"
+        android:minWidth="@dimen/rate_currency_rate_min_width"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text20"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/itemRateCurrencyGuideline"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
