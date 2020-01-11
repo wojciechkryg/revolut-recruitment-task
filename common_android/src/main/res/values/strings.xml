@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">common_android</string>
+    <string name="aud_currency">Australian Dollar</string>
+    <string name="bgn_currency">Bulgarian Lev</string>
+    <string name="brl_currency">Brazilian Real</string>
+    <string name="cad_currency">Canadian Dollar</string>
+    <string name="chf_currency">Swiss Franc</string>
+    <string name="cny_currency">Chinese Yuan</string>
+    <string name="czk_currency">Czech Koruna</string>
+    <string name="dkk_currency">Danish Krone</string>
+    <string name="eur_currency">Euro</string>
+    <string name="gbp_currency">British Pound</string>
+    <string name="hkd_currency">Hong Kong Dollar</string>
+    <string name="hrk_currency">Croatian Kuna</string>
+    <string name="huf_currency">Hungarian Forint</string>
+    <string name="idr_currency">Indonesian Rupiah</string>
+    <string name="ils_currency">Israeli New Shekel</string>
+    <string name="inr_currency">Indian Rupee</string>
+    <string name="isk_currency">Icelandic Króna</string>
+    <string name="jpy_currency">Japanese Yen</string>
+    <string name="krw_currency">South Korean Won</string>
+    <string name="mxn_currency">Mexican Peso</string>
+    <string name="myr_currency">Malaysian Ringgit</string>
+    <string name="nok_currency">Norwegian Krone</string>
+    <string name="nzd_currency">New Zealand Dollar</string>
+    <string name="php_currency">Philippine Peso</string>
+    <string name="pln_currency">Polish Złoty</string>
+    <string name="ron_currency">Romanian Leu</string>
+    <string name="rub_currency">Russian Ruble</string>
+    <string name="sek_currency">Swedish Krona</string>
+    <string name="sgd_currency">Singapore Dollar</string>
+    <string name="thb_currency">Thai Baht</string>
+    <string name="try_currency">Turkish Lira</string>
+    <string name="usd_currency">US Dollar</string>
+    <string name="zar_currency">South African Rand</string>
 </resources>

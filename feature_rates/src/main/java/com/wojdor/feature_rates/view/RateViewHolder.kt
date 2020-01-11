@@ -20,8 +20,7 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
 
     private fun setCurrencyLabels(currency: Currency) {
         itemView.itemRateCurrencyTv.text = currency.name
-        // TODO: Set currency name
-        itemView.itemRateCurrencyNameTv.text = currency.name
+        itemView.itemRateCurrencyNameTv.setText(CurrencyRescources.getName(currency))
     }
 
     private fun setCurrencyIcon(currency: Currency) {
