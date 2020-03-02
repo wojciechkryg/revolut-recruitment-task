@@ -31,11 +31,13 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
             adapter = ratesAdapter
         }
         ratesAdapter.onClick = {
+            presenter.setCurrencyAsChosen(it.currency)
             ratesRatesRv.scrollToTop()
         }
     }
 
     override fun showRates(rates: Rates) {
+        // TODO: Check why it is scrolling to bottom after clicking on rate from the top half
         ratesAdapter.showRates(rates.rates)
     }
 
