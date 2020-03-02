@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    abstract fun onBind(model: T)
     open fun onUpdate(bundle: Bundle) {}
 
     fun onUpdate(payloads: List<Any>) {

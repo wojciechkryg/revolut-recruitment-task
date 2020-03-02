@@ -7,10 +7,10 @@ import com.wojdor.common_android.extension.inflate
 import com.wojdor.domain.Rate
 import com.wojdor.feature_rates.R
 
-
 class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
 
     private val items = mutableListOf<Rate>()
+    var onClick: (Rate) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {
         val view = parent.inflate(R.layout.item_rate)
@@ -20,7 +20,7 @@ class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: RateViewHolder, position: Int) {
-        holder.onBind(items[position])
+        holder.onBind(items[position], onClick)
     }
 
     override fun onBindViewHolder(

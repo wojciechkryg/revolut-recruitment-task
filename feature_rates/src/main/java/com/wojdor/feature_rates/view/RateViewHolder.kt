@@ -12,10 +12,11 @@ import java.math.BigDecimal
 
 class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
 
-    override fun onBind(model: Rate) {
+    fun onBind(model: Rate, onClick: (Rate) -> Unit) {
         setCurrencyIcon(model.currency)
         setCurrencyLabels(model.currency)
         setRate(model.rate)
+        setOnClick(model, onClick)
     }
 
     private fun setCurrencyLabels(currency: Currency) {
@@ -29,6 +30,17 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
 
     private fun setRate(rate: BigDecimal) {
         itemView.itemRateCurrencyRateEt.setText(rate.formatToTwoDecimalPlacesIfExist())
+    }
+
+    private fun setOnClick(model: Rate, onClick: (Rate) -> Unit) {
+        itemView.setOnClickListener {
+            onClick(model)
+        }
+        itemView.itemRateCurrencyRateEt.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                onClick(model)
+            }
+        }
     }
 
     override fun onUpdate(bundle: Bundle) {
