@@ -11,14 +11,19 @@ import kotlin.random.Random
 class MockRatesRepository : BaseRatesRepository {
 
     private val mockDate by lazy { "2018-09-06" }
-    private val mockList by lazy {
-        mutableListOf<Rate>().apply {
-            Currency.values().forEach {
-                add(Rate(it, BigDecimal(Random.nextDouble(0.1, 3.0))))
-            }
+
+    override fun getRates(baseCurrency: Currency): Single<Rates> =
+        Single.just(Rates(mockDate, getMockList(baseCurrency)))
+
+    private fun getMockList(baseCurrency: Currency) = mutableListOf<Rate>().apply {
+        add(Rate(baseCurrency, BigDecimal.ONE))
+        Currency.values().filterNot { baseCurrency == it }.forEach {
+            add(Rate(it, BigDecimal(Random.nextDouble(RANDOM_FROM, RANDOM_TO))))
         }
     }
 
-    override fun getRates(baseCurrency: Currency): Single<Rates> =
-        Single.just(Rates(mockDate, mockList))
+    companion object {
+        private const val RANDOM_FROM = 0.1
+        private const val RANDOM_TO = 3.0
+    }
 }
