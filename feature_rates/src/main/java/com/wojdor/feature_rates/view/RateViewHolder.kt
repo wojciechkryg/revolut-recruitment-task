@@ -20,8 +20,10 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
     }
 
     private fun setCurrencyLabels(currency: Currency) {
-        itemView.itemRateCurrencyTv.text = currency.name
-        itemView.itemRateCurrencyNameTv.setText(CurrencyRescources.getName(currency))
+        with(itemView) {
+            itemRateCurrencyTv.text = currency.name
+            itemRateCurrencyNameTv.setText(CurrencyRescources.getName(currency))
+        }
     }
 
     private fun setCurrencyIcon(currency: Currency) {
@@ -33,12 +35,15 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
     }
 
     private fun setOnClick(model: Rate, onClick: (Rate) -> Unit) {
-        itemView.setOnClickListener {
-            onClick(model)
-        }
-        itemView.itemRateCurrencyRateEt.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
+        with(itemView) {
+            setOnClickListener {
                 onClick(model)
+                itemRateCurrencyRateEt.requestFocus()
+            }
+            itemRateCurrencyRateEt.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    onClick(model)
+                }
             }
         }
     }
