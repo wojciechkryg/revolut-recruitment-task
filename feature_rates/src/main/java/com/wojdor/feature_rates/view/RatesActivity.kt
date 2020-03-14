@@ -42,6 +42,5 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
 
     override fun showFetchRatesError(error: Throwable) {
         showError(R.string.error_fetch_rates)
-        // TODO: Check tests if it is called onError and Presenter tests
     }
 }

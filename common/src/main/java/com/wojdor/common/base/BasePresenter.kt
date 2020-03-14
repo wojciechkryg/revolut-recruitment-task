@@ -16,7 +16,7 @@ abstract class BasePresenter<V : BaseContract.View> : BaseContract.Presenter<V> 
         this.view = view
     }
 
-    private fun clearCompositeDisposable() {
+    protected fun clearCompositeDisposable() {
         compositeDisposable.clear()
     }
 }

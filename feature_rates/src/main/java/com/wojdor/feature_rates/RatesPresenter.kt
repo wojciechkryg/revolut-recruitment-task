@@ -16,6 +16,7 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
 
     private val ratesOrder = mutableListOf<Currency>()
     private var latestOrderedRates = Rates()
+    private var baseCurrency = Currency.EUR
 
     override fun onAttachView(view: RatesContract.View) {
         super.onAttachView(view)
@@ -23,7 +24,7 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
     }
 
     override fun startFetchingRates() {
-        ratesUsecase.getRatesWithInterval()
+        ratesUsecase.getRatesWithInterval(baseCurrency)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -55,8 +56,11 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
     }
 
     override fun setCurrencyAsChosen(currency: Currency) {
-        ratesOrder.makeFirst(currency)
+        baseCurrency = currency
+        ratesOrder.makeFirst(baseCurrency)
         onRatesFetched(latestOrderedRates)
+        clearCompositeDisposable()
+        startFetchingRates()
     }
 }
 

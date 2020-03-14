@@ -27,15 +27,15 @@ class RatesUsecaseTest {
 
     @Test
     fun `When usecase has empty Rates then should return empty Rates`() {
-        every { mockRatesRepository.getRates() } returns Single.just(mockEmptyRates)
-        val usecaseResult = RatesUsecase(mockRatesRepository).getRatesWithInterval().blockingFirst()
+        every { mockRatesRepository.getRates(any()) } returns Single.just(mockEmptyRates)
+        val usecaseResult = RatesUsecase(mockRatesRepository).getRatesWithInterval(Currency.EUR).blockingFirst()
         assert(usecaseResult.rates.isEmpty())
     }
 
     @Test
     fun `When usecase has Rates then should return same Rates`() {
-        every { mockRatesRepository.getRates() } returns Single.just(mockRates)
-        val usecaseResult = RatesUsecase(mockRatesRepository).getRatesWithInterval().blockingFirst()
+        every { mockRatesRepository.getRates(any()) } returns Single.just(mockRates)
+        val usecaseResult = RatesUsecase(mockRatesRepository).getRatesWithInterval(Currency.EUR).blockingFirst()
         assert(usecaseResult.rates.isNotEmpty())
         assertEquals(mockDate, usecaseResult.date)
         Currency.values().forEach { currency ->

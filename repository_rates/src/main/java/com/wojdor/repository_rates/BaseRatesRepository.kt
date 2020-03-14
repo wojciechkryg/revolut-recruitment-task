@@ -6,5 +6,5 @@ import io.reactivex.Single
 
 interface BaseRatesRepository {
 
-    fun getRates(baseCurrency: Currency = Currency.EUR): Single<Rates>
+    fun getRates(baseCurrency: Currency): Single<Rates>
 }
