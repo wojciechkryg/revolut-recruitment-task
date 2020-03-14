@@ -6,7 +6,7 @@ import com.wojdor.domain.Rates
 import com.wojdor.domain.enums.Currency
 import com.wojdor.repository_rates.BaseRatesRepository
 import io.mockk.every
-import io.mockk.spyk
+import io.mockk.mockk
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -14,7 +14,7 @@ import java.math.BigDecimal
 
 class RatesUsecaseTest {
 
-    private val mockRatesRepository by lazy { spyk<BaseRatesRepository>() }
+    private val mockRatesRepository by lazy { mockk<BaseRatesRepository>() }
     private val mockEmptyRates by lazy { Rates(String.empty, emptyList()) }
     private val mockDate by lazy { "2018-09-06" }
     private val mockRates by lazy {
