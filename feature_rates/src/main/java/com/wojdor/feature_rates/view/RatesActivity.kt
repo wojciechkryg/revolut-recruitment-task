@@ -37,11 +37,11 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
     }
 
     override fun showRates(rates: Rates) {
-        // TODO: Check why it is scrolling to bottom after clicking on rate from the top half
         ratesAdapter.showRates(rates.rates)
     }
 
     override fun showFetchRatesError(error: Throwable) {
-        // TODO: Show error
+        showError(R.string.error_fetch_rates)
+        // TODO: Check tests if it is called onError and Presenter tests
     }
 }

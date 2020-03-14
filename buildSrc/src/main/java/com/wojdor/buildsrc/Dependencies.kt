@@ -18,6 +18,7 @@ object Version {
     val junit = "4.12"
     val koin = "2.0.1"
     val kotlin = "1.3.60"
+    val material = "1.1.0"
     val mockk = "1.9.3"
     val retrofit = "2.6.2"
     val recyclerView = "1.1.0"
@@ -31,6 +32,7 @@ object Library {
         val core = "androidx.core:core-ktx:${Version.core}"
         val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
+        val material = "com.google.android.material:material:${Version.material}"
         val recyclerView = "androidx.recyclerview:recyclerview:${Version.recyclerView}"
     }
 

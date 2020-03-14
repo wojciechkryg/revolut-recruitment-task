@@ -14,7 +14,7 @@ interface RatesContract {
 
     interface Presenter : BaseContract.Presenter<View> {
         val ratesUsecase: BaseRatesUsecase
-        fun fetchRates()
+        fun startFetchingRates()
         fun setCurrencyAsChosen(currency: Currency)
     }
 }

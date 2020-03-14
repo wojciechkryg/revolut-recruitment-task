@@ -19,10 +19,10 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
 
     override fun onAttachView(view: RatesContract.View) {
         super.onAttachView(view)
-        fetchRates()
+        startFetchingRates()
     }
 
-    override fun fetchRates() {
+    override fun startFetchingRates() {
         ratesUsecase.getRatesWithInterval()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
