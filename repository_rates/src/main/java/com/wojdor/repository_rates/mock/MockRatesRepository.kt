@@ -10,10 +10,8 @@ import kotlin.random.Random
 
 class MockRatesRepository : BaseRatesRepository {
 
-    private val mockDate by lazy { "2018-09-06" }
-
     override fun getRates(baseCurrency: Currency): Single<Rates> =
-        Single.just(Rates(mockDate, getMockList(baseCurrency)))
+        Single.just(Rates(getMockList(baseCurrency)))
 
     private fun getMockList(baseCurrency: Currency) = mutableListOf<Rate>().apply {
         add(Rate(baseCurrency, BigDecimal.ONE))

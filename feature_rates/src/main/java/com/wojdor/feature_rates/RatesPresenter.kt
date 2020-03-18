@@ -59,7 +59,7 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
         view?.showRates(latestOrderedRates)
     }
 
-    private fun sortRatesByOrder(rates: Rates) = Rates(rates.date, sortRatesByOrder(rates.rates))
+    private fun sortRatesByOrder(rates: Rates) = Rates(sortRatesByOrder(rates.rates))
 
     private fun sortRatesByOrder(rates: List<Rate>) = mutableListOf<Rate>().apply {
         ratesOrder.forEach { currency ->

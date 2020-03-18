@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RatesApi {
-    @GET("/latest")
+    @GET("latest")
     fun getRates(@Query("base") base: String): Single<RatesDto>
 }

@@ -8,7 +8,7 @@ object Environment {
 }
 
 object BaseUrl {
-    val develop = "https://revolut.duckdns.org/"
-    val test = "https://revolut.duckdns.org/"
-    val production = "https://revolut.duckdns.org/"
+    val develop = "https://hiring.revolut.codes/api/android/"
+    val test = "https://hiring.revolut.codes/api/android/"
+    val production = "https://hiring.revolut.codes/api/android/"
 }

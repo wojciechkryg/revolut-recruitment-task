@@ -1,6 +1,5 @@
 package com.wojdor.domain.mapper
 
-import com.wojdor.common.extension.empty
 import com.wojdor.common.util.enumValueOrNull
 import com.wojdor.data.RatesDto
 import com.wojdor.domain.Rate
@@ -13,13 +12,12 @@ object RatesMapper {
     private val DEFAULT_BASE_RATE by lazy { BigDecimal.ONE }
 
     fun map(ratesDto: RatesDto?) = Rates(
-        ratesDto?.date ?: String.empty,
         ratesDto?.let { mapRates(it) } ?: emptyList()
     )
 
     private fun mapRates(ratesDto: RatesDto): List<Rate> {
         return mutableListOf<Rate>().apply {
-            ratesDto.base?.let {
+            ratesDto.baseCurrency?.let {
                 add(Rate(enumValueOrNull(it) ?: return@let, DEFAULT_BASE_RATE))
             }
             ratesDto.rates?.forEach {

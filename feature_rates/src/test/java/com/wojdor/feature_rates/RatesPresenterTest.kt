@@ -19,9 +19,8 @@ class RatesPresenterTest {
     private val mockRatesUsecase by lazy { spyk<BaseRatesUsecase>() }
     private val mockRatesView by lazy { spyk<RatesContract.View>() }
     private val ratesPresenter by lazy { RatesPresenter(mockRatesUsecase) }
-    private val mockDate by lazy { "2018-09-06" }
     private val mockRates by lazy {
-        Rates(mockDate, mutableListOf<Rate>().apply {
+        Rates(mutableListOf<Rate>().apply {
             Currency.values().forEachIndexed { index, currency ->
                 add(Rate(currency, BigDecimal(index)))
             }
