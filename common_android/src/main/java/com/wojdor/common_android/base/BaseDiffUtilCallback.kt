@@ -19,12 +19,11 @@ abstract class BaseDiffUtilCallback<T>(
         areContentsTheSame(oldItems[oldItemPosition], newItems[newItemPosition])
 
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        val bundle = Bundle()
-        changePayload(oldItems[oldItemPosition], newItems[newItemPosition], bundle)
+        val bundle = changePayload(oldItems[oldItemPosition], newItems[newItemPosition], Bundle())
         return if (bundle.isEmpty) null else bundle
     }
 
-    open fun changePayload(oldItem: T, newItem: T, bundle: Bundle) {}
+    open fun changePayload(oldItem: T, newItem: T, bundle: Bundle): Bundle = bundle
 
     abstract fun areItemsTheSame(oldItem: T, newItem: T): Boolean
 

@@ -15,6 +15,7 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
     BasePresenter<RatesContract.View>(), RatesContract.Presenter {
 
     private val ratesOrder = mutableListOf<Currency>()
+    private var baseRates = emptyList<Rate>()
     private var latestOrderedRates = Rates()
     private var baseCurrency = DEFAULT_BASE_CURRENCY
     private var rateMultiplier = DEFAULT_RATE_MULTIPLIER
@@ -44,19 +45,21 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
     }
 
     private fun onRatesFetched(rates: Rates) {
+        baseRates = rates.deepCopy().rates
         applyRateMultiplier(rates)
         reorderRates(rates)
     }
 
     private fun applyRateMultiplier(rates: Rates) {
-        rates.rates.forEach {
-            it.rate = it.rate * rateMultiplier
+        rates.rates.forEach { rate ->
+            rate.rate = rateMultiplier * (baseRates.find { rate.currency == it.currency }?.rate
+                ?: BigDecimal.ZERO)
         }
     }
 
     private fun reorderRates(rates: Rates) {
         latestOrderedRates = sortRatesByOrder(rates)
-        view?.showRates(latestOrderedRates)
+        view?.showRates(latestOrderedRates.deepCopy())
     }
 
     private fun sortRatesByOrder(rates: Rates) = Rates(sortRatesByOrder(rates.rates))
@@ -79,6 +82,15 @@ class RatesPresenter(override val ratesUsecase: BaseRatesUsecase) :
     private fun getRateMultiplierForCurrency(currency: Currency) =
         (latestOrderedRates.rates.find { it.currency == currency }?.rate
             ?: DEFAULT_RATE_MULTIPLIER)
+
+    override fun setRateMultiplier(multiplier: BigDecimal) {
+        if (rateMultiplier == multiplier) return
+        rateMultiplier = multiplier
+        applyRateMultiplier(latestOrderedRates)
+        refreshView()
+        clearCompositeDisposable()
+        startFetchingRates()
+    }
 
     private fun refreshView() {
         reorderRates(latestOrderedRates)

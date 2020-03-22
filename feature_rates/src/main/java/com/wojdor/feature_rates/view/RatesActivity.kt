@@ -25,16 +25,23 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
     }
 
     private fun setupRatesList() {
-        ratesAdapter = RatesAdapter()
         with(ratesRatesRv) {
             layoutManager = LinearLayoutManager(this@RatesActivity)
-            adapter = ratesAdapter
+            adapter = createRatesAdapter().also { ratesAdapter = it }
         }
-        ratesAdapter.onClick = {
+    }
+
+    private fun createRatesAdapter() = RatesAdapter().apply {
+        onClick = {
             presenter.setCurrencyAsChosen(it.currency)
             ratesRatesRv.scrollToTop()
         }
+        onEdit = {
+            presenter.setRateMultiplier(it)
+        }
     }
+
+    override fun getRates() = ratesAdapter.items
 
     override fun showRates(rates: Rates) {
         ratesAdapter.showRates(rates.rates)

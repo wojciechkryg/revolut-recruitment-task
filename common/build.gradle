@@ -9,6 +9,7 @@ dependencies {
     implementation Library.kotlin
     implementation Library.rxKotlin
     testImplementation Library.Test.junit
+    testImplementation Library.Test.mockk
 }
 
 sourceCompatibility = "7"

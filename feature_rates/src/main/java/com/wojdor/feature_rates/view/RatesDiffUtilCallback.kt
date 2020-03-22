@@ -12,10 +12,11 @@ class RatesDiffUtilCallback(oldItems: List<Rate>, newItems: List<Rate>) :
 
     override fun areContentsTheSame(oldItem: Rate, newItem: Rate) = oldItem == newItem
 
-    override fun changePayload(oldItem: Rate, newItem: Rate, bundle: Bundle) {
+    override fun changePayload(oldItem: Rate, newItem: Rate, bundle: Bundle): Bundle {
         if (oldItem.rate != newItem.rate) {
             bundle.putSerializable(RATE_KEY, newItem.rate)
         }
+        return bundle
     }
 
     companion object {

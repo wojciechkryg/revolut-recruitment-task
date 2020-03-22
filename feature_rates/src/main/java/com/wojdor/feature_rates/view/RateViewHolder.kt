@@ -2,8 +2,10 @@ package com.wojdor.feature_rates.view
 
 import android.os.Bundle
 import android.view.View
-import com.wojdor.common.extension.formatToTwoDecimalPlacesIfExist
+import androidx.core.widget.doAfterTextChanged
+import com.wojdor.common.extension.formatToTwoDecimalPlacesString
 import com.wojdor.common_android.base.BaseViewHolder
+import com.wojdor.common_android.extension.toBigDecimal
 import com.wojdor.common_android.util.CurrencyRescources
 import com.wojdor.domain.Rate
 import com.wojdor.domain.enums.Currency
@@ -12,11 +14,12 @@ import java.math.BigDecimal
 
 class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
 
-    fun onBind(model: Rate, onClick: (Rate) -> Unit) {
+    fun onBind(model: Rate, onClick: (Rate) -> Unit, onEdit: (BigDecimal) -> Unit) {
         setCurrencyIcon(model.currency)
         setCurrencyLabels(model.currency)
         setRate(model.rate)
         setOnClick(model, onClick)
+        setOnEdit(onEdit)
     }
 
     private fun setCurrencyLabels(currency: Currency) {
@@ -31,7 +34,10 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
     }
 
     private fun setRate(rate: BigDecimal) {
-        itemView.itemRateCurrencyRateEt.setText(rate.formatToTwoDecimalPlacesIfExist())
+        with(itemView.itemRateCurrencyRateEt) {
+            if (hasFocus()) return
+            setText(rate.formatToTwoDecimalPlacesString())
+        }
     }
 
     private fun setOnClick(model: Rate, onClick: (Rate) -> Unit) {
@@ -43,6 +49,16 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
             itemRateCurrencyRateEt.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     onClick(model)
+                }
+            }
+        }
+    }
+
+    private fun setOnEdit(onEdit: (BigDecimal) -> Unit) {
+        with(itemView.itemRateCurrencyRateEt) {
+            doAfterTextChanged {
+                if (hasFocus()) {
+                    onEdit(text.toBigDecimal())
                 }
             }
         }

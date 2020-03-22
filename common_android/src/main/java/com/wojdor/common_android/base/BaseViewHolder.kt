@@ -9,6 +9,12 @@ abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemV
     open fun onUpdate(bundle: Bundle) {}
 
     fun onUpdate(payloads: List<Any>) {
-        onUpdate(payloads.first() as? Bundle ?: return)
+        payloads.forEach {
+            onUpdate(it)
+        }
+    }
+
+    private fun onUpdate(payload: Any) {
+        onUpdate(payload as? Bundle ?: return)
     }
 }
