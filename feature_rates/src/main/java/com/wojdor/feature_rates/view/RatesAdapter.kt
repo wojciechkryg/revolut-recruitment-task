@@ -12,7 +12,7 @@ class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
 
     val items = mutableListOf<Rate>()
     var onClick: (Rate) -> Unit = {}
-    var onEdit: (BigDecimal) -> Unit = {}
+    var onUserInput: (BigDecimal) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {
         val view = parent.inflate(R.layout.item_rate)
@@ -22,7 +22,7 @@ class RatesAdapter : RecyclerView.Adapter<RateViewHolder>() {
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: RateViewHolder, position: Int) {
-        holder.onBind(items[position], onClick, onEdit)
+        holder.onBind(items[position], onClick, onUserInput)
     }
 
     override fun onBindViewHolder(

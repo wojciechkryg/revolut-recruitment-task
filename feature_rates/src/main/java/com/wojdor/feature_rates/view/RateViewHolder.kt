@@ -2,10 +2,8 @@ package com.wojdor.feature_rates.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
 import com.wojdor.common.extension.formatToTwoDecimalPlacesString
 import com.wojdor.common_android.base.BaseViewHolder
-import com.wojdor.common_android.extension.toBigDecimal
 import com.wojdor.common_android.util.CurrencyRescources
 import com.wojdor.domain.Rate
 import com.wojdor.domain.enums.Currency
@@ -19,7 +17,7 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
         setCurrencyLabels(model.currency)
         setRate(model.rate)
         setOnClick(model, onClick)
-        setOnEdit(onEdit)
+        setOnUserInput(onEdit)
     }
 
     private fun setCurrencyLabels(currency: Currency) {
@@ -54,14 +52,8 @@ class RateViewHolder(itemView: View) : BaseViewHolder<Rate>(itemView) {
         }
     }
 
-    private fun setOnEdit(onEdit: (BigDecimal) -> Unit) {
-        with(itemView.itemRateCurrencyRateEt) {
-            doAfterTextChanged {
-                if (hasFocus()) {
-                    onEdit(text.toBigDecimal())
-                }
-            }
-        }
+    private fun setOnUserInput(onUserInput: (BigDecimal) -> Unit) {
+        itemView.itemRateCurrencyRateEt.onUserInput = onUserInput
     }
 
     override fun onUpdate(bundle: Bundle) {

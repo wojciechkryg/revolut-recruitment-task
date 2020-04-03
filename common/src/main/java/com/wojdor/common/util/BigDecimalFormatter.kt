@@ -3,6 +3,7 @@ package com.wojdor.common.util
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.*
 
@@ -14,6 +15,7 @@ object BigDecimalFormatter {
         get() = (NumberFormat.getInstance(locale) as DecimalFormat).apply {
             isParseBigDecimal = true
         }
+    val separator get() = DecimalFormatSymbols.getInstance().decimalSeparator
 
     fun formatToTwoDecimalPlacesString(number: BigDecimal): String =
         numberFormat.format(number.setScale(DECIMAL_PLACES, RoundingMode.HALF_UP))

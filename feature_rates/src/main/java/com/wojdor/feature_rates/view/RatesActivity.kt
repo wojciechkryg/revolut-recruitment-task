@@ -36,7 +36,7 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
             presenter.setCurrencyAsChosen(it.currency)
             ratesRatesRv.scrollToTop()
         }
-        onEdit = {
+        onUserInput = {
             presenter.setRateMultiplier(it)
         }
     }

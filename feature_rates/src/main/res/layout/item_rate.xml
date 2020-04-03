@@ -52,11 +52,10 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
 
-    <EditText
+    <com.wojdor.common_android.view.CurrencyEditText
         android:id="@+id/itemRateCurrencyRateEt"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:digits="0123456789,."
         android:gravity="end"
         android:hint="@string/currency_rate_hint"
         android:importantForAutofill="no"
