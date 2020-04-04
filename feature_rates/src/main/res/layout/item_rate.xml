@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding16"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/padding16">
 
     <ImageView
         android:id="@+id/itemRateCurrencyFlagIv"
@@ -57,11 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="end"
-        android:hint="@string/currency_rate_hint"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
         android:labelFor="@id/itemRateCurrencyNameTv"
-        android:maxLength="9"
         android:minWidth="@dimen/rate_currency_rate_min_width"
         android:textColor="@color/black"
         android:textSize="@dimen/text20"

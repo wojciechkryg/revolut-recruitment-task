@@ -2,8 +2,10 @@ package com.wojdor.common_android.view
 
 import android.content.Context
 import android.graphics.Rect
+import android.text.InputType
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
+import android.view.View
 import android.widget.EditText
 import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -31,11 +33,15 @@ class CurrencyEditText(
     )
 
     private var hadMaximumDecimalNumbersBeforeTextChange = false
+    private var hadMaximumSeparatorsBeforeTextChange = false
     private var textBeforeTextChange = String.empty
     var onUserInput: (BigDecimal) -> Unit = {}
 
     init {
         keyListener = DigitsKeyListener.getInstance(ACCEPTED_CHARACTERS)
+        setRawInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
+        importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO
+        hint = "${Int.zero}"
         doBeforeTextChanged { text, _, _, _ -> beforeTextChange(text.toString()) }
         doOnTextChanged { text, startPosition, lengthBefore, lengthAfter ->
             onTextChange(text.toString(), startPosition, lengthBefore, lengthAfter)
@@ -44,11 +50,15 @@ class CurrencyEditText(
 
     private fun beforeTextChange(text: String) {
         hadMaximumDecimalNumbersBeforeTextChange = hasMaximumNumberOfDecimalNumbers(text)
+        hadMaximumSeparatorsBeforeTextChange = hasMaximumNumberOfSeparators(text)
         textBeforeTextChange = text
     }
 
     private fun hasMaximumNumberOfDecimalNumbers(input: String) =
-        input.substringAfter(separator).length == MAX_DECIMAL_NUMBERS_COUNT
+        input.substringAfter(separator).length >= MAX_DECIMAL_NUMBERS_COUNT
+
+    private fun hasMaximumNumberOfSeparators(input: String) =
+        input.count { it == separator } >= MAX_SEPARATOR_COUNT
 
     private fun onTextChange(
         input: String,
@@ -67,16 +77,59 @@ class CurrencyEditText(
         lengthBefore: Int,
         lengthAfter: Int
     ) {
-        if (isInputWithMoreDecimalNumbers(input)) {
-            setText(textBeforeTextChange)
-            setSelection(startPosition)
-        } else {
-            onUserInputChanged(input, startPosition, lengthBefore, lengthAfter)
+        when {
+            shouldTextNotChange(input) ->
+                setTextAndSelection(textBeforeTextChange, startPosition)
+            else -> onUserInputChanged(input, startPosition, lengthBefore, lengthAfter)
         }
     }
 
+    private fun shouldTextNotChange(input: String) =
+        isInputTooLong(input)
+                || isInputWithMoreDecimalNumbers(input)
+                || isInputWithMorePossibleSeparators(input)
+
+    private fun isInputTooLong(input: String) =
+        isInputWithoutSeparatorTooLong(input) || isInputWithSeparatorTooLong(input)
+
+    private fun isInputWithoutSeparatorTooLong(input: String) =
+        input.none { it == Char.dot || it == Char.comma }
+                && input.length > MAX_LENGTH_WITHOUT_SEPARATOR
+
+    private fun isInputWithSeparatorTooLong(input: String) =
+        input.any { it == Char.dot || it == Char.comma }
+                && isNotPossibleToAddMoreCharactersWithSeparator(input)
+
+    private fun isNotPossibleToAddMoreCharactersWithSeparator(input: String) =
+        isSeparatorAsLastCharacterForLengthWithoutSeparator(input)
+                || input.length > MAX_LENGTH_WITH_SEPARATOR
+
+    private fun isSeparatorAsLastCharacterForLengthWithoutSeparator(input: String) =
+        input.indexOfFirst { it == Char.dot || it == Char.comma } == MAX_LENGTH_WITHOUT_SEPARATOR
+
     private fun isInputWithMoreDecimalNumbers(input: String) =
         hadMaximumDecimalNumbersBeforeTextChange && hasTooManyDecimalNumbers(input)
+
+    private fun isInputWithMorePossibleSeparators(input: String) =
+        hadMaximumSeparatorsBeforeTextChange && hasTooManySeparators(input)
+
+    private fun hasTooManySeparators(input: String) =
+        input.count { it == Char.dot || it == Char.comma } > MAX_SEPARATOR_COUNT
+
+    private fun hasTooManyDecimalNumbers(input: String) =
+        hasTooManyDecimalNumbersWithSeparator(input, Char.dot)
+                || hasTooManyDecimalNumbersWithSeparator(input, Char.comma)
+
+    private fun hasTooManyDecimalNumbersWithSeparator(input: String, possibleSeparator: Char) =
+        with(input) {
+            contains(possibleSeparator)
+                    && substringAfter(possibleSeparator).length > MAX_DECIMAL_NUMBERS_COUNT
+        }
+
+    private fun setTextAndSelection(text: String, selectionPosition: Int = text.length) {
+        setText(text)
+        setSelection(selectionPosition)
+    }
 
     private fun onUserInputChanged(
         input: String,
@@ -85,9 +138,7 @@ class CurrencyEditText(
         changeCountAfterPosition: Int
     ) {
         when {
-            //TODO: Check if text is too long, max 11 with spaces, 12 with separator
             hasWrongSeparator(input) -> applyProperSeparator(input)
-            hasTooManySeparators(input) -> deleteAdditionalSeparators(input)
             isSeparatorFirst(input) -> addZeroAsPrefix(input)
             else -> formatInput(
                 input,
@@ -107,42 +158,24 @@ class CurrencyEditText(
     private fun isWrongSeparator(possibleSeparator: Char) = possibleSeparator != separator
 
     private fun applyProperSeparator(input: String) {
-        val lastSelectionEnd = selectionEnd
         val inputWithProperSeparator = when {
             input.contains(Char.dot) -> input.replace(Char.dot, separator)
             input.contains(Char.comma) -> input.replace(Char.comma, separator)
             else -> input
         }
-        setText(inputWithProperSeparator)
-        val selection = when {
-            hasTooManySeparators(inputWithProperSeparator) ->
-                inputWithProperSeparator.indexOfLast { it == separator }
-            else -> lastSelectionEnd
+        if (isSeparatorFirst(inputWithProperSeparator)) {
+            addZeroAsPrefix(inputWithProperSeparator)
+        } else {
+            setTextAndSelection(inputWithProperSeparator)
         }
-        setSelection(selection)
     }
-
-    private fun hasTooManySeparators(input: String) =
-        input.count { it == separator } > MAX_SEPARATOR_COUNT
-
-    private fun deleteAdditionalSeparators(input: String) {
-        val inputWithProperSeparatorCount =
-            input.substringTo(input.indexOfLast { it == separator })
-        setText(inputWithProperSeparatorCount)
-        setSelection(inputWithProperSeparatorCount.length)
-    }
-
-    private fun hasTooManyDecimalNumbers(input: String) =
-        input.contains(separator) &&
-                input.substringAfter(separator).length > MAX_DECIMAL_NUMBERS_COUNT
 
     private fun isSeparatorFirst(input: String) =
         input.isNotEmpty() && input.first() == separator
 
     private fun addZeroAsPrefix(input: String) {
         val inputWithPrefix = "${Int.zero}$input"
-        setText(inputWithPrefix)
-        setSelection(inputWithPrefix.length)
+        setTextAndSelection(inputWithPrefix)
     }
 
     private fun formatInput(
@@ -207,12 +240,21 @@ class CurrencyEditText(
         lastSelectionEnd: Int
     ) {
         // TODO: Selection not working properly
-        if (lastSelectionEnd == input.length) {
-            setSelection(inputFormatted.length, inputFormatted.length)
-        } else {
-            setSelection(lastSelectionStart, lastSelectionStart)
+        when {
+            shouldSetSelectionOnEnd(input, inputFormatted, lastSelectionEnd) -> setSelection(
+                inputFormatted.length
+            )
+            else -> setSelection(lastSelectionStart)
         }
     }
+
+    private fun shouldSetSelectionOnEnd(
+        input: String,
+        inputFormatted: String,
+        lastSelectionEnd: Int
+    ) = lastSelectionEnd == input.length
+            || lastSelectionEnd == inputFormatted.length
+            || lastSelectionEnd > inputFormatted.length
 
     private fun isInputNotFormatted(inputFormatted: String, input: String) =
         if (input.contains(separator)) {
@@ -242,6 +284,8 @@ class CurrencyEditText(
     companion object {
         const val DEFAULT_STYLE_RES = 0
         const val ACCEPTED_CHARACTERS = "0123456789,."
+        const val MAX_LENGTH_WITHOUT_SEPARATOR = 11
+        const val MAX_LENGTH_WITH_SEPARATOR = 12
         const val MAX_SEPARATOR_COUNT = 1
         const val MAX_DECIMAL_NUMBERS_COUNT = 2
         const val NO_CHANGES = 0
