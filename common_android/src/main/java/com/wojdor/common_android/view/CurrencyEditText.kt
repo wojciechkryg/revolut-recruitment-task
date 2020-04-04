@@ -12,6 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import com.wojdor.common.extension.*
 import com.wojdor.common.util.BigDecimalFormatter.separator
 import com.wojdor.common_android.R
+import com.wojdor.common_android.extension.hideKeyboard
 import com.wojdor.common_android.extension.showKeyboard
 import java.math.BigDecimal
 
@@ -278,6 +279,8 @@ class CurrencyEditText(
         if (focused) {
             setProperTextLengthOnFocus()
             showKeyboard()
+        } else {
+            hideKeyboard()
         }
     }
 
