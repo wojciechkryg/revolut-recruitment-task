@@ -276,16 +276,25 @@ class CurrencyEditText(
     override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect)
         if (focused) {
-            setSelection(text.length)
+            setProperTextLengthOnFocus()
             showKeyboard()
+        }
+    }
+
+    private fun setProperTextLengthOnFocus() {
+        val input = text.toString()
+        if (isInputTooLong(input)) {
+            setTextAndSelection(input.substringTo(MAX_LENGTH_WITHOUT_SEPARATOR))
+        } else {
+            setSelection(input.length)
         }
     }
 
     companion object {
         const val DEFAULT_STYLE_RES = 0
         const val ACCEPTED_CHARACTERS = "0123456789,."
-        const val MAX_LENGTH_WITHOUT_SEPARATOR = 11
-        const val MAX_LENGTH_WITH_SEPARATOR = 12
+        const val MAX_LENGTH_WITHOUT_SEPARATOR = 9
+        const val MAX_LENGTH_WITH_SEPARATOR = 10
         const val MAX_SEPARATOR_COUNT = 1
         const val MAX_DECIMAL_NUMBERS_COUNT = 2
         const val NO_CHANGES = 0
