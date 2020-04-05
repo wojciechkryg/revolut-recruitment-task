@@ -11,4 +11,13 @@
         android:layout_height="match_parent"
         tools:itemCount="10"
         tools:listitem="@layout/item_rate" />
+
+    <TextView
+        android:id="@+id/ratesNoDataTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/error_no_data"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

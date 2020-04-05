@@ -3,7 +3,9 @@ package com.wojdor.feature_rates.view
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wojdor.common_android.base.BaseMvpActivity
+import com.wojdor.common_android.extension.gone
 import com.wojdor.common_android.extension.scrollToTop
+import com.wojdor.common_android.extension.visible
 import com.wojdor.domain.Rates
 import com.wojdor.feature_rates.R
 import com.wojdor.feature_rates.RatesContract
@@ -48,6 +50,7 @@ class RatesActivity : BaseMvpActivity<RatesContract.View, RatesContract.Presente
     }
 
     override fun showFetchRatesError(error: Throwable) {
-        showError(R.string.error_fetch_rates)
+        ratesRatesRv.gone()
+        ratesNoDataTv.visible()
     }
 }
