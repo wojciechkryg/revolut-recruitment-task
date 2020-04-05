@@ -2,7 +2,6 @@ import com.wojdor.buildsrc.Application
 import com.wojdor.buildsrc.Dimension
 import com.wojdor.buildsrc.Library
 import com.wojdor.buildsrc.Module
-import com.wojdor.buildsrc.Suffix
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
