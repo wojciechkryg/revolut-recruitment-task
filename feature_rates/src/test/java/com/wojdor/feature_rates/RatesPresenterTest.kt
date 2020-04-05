@@ -21,9 +21,9 @@ class RatesPresenterTest {
     private val ratesPresenter by lazy { RatesPresenter(mockRatesUsecase) }
     private val mockRates by lazy {
         Rates(mutableListOf<Rate>().apply {
-            Currency.values().forEachIndexed { index, currency ->
-                add(Rate(currency, BigDecimal(index)))
-            }
+            add(Rate(Currency.EUR, BigDecimal.ONE))
+            add(Rate(Currency.USD, BigDecimal.ONE))
+            add(Rate(Currency.GBP, BigDecimal.ONE))
         })
     }
 
