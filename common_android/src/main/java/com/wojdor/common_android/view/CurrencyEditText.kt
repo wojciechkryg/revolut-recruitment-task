@@ -6,6 +6,7 @@ import android.text.InputType
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -41,6 +42,7 @@ class CurrencyEditText(
     init {
         keyListener = DigitsKeyListener.getInstance(ACCEPTED_CHARACTERS)
         setRawInputType(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
+        imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
         importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO
         hint = "${Int.zero}"
         doBeforeTextChanged { text, _, _, _ -> beforeTextChange(text.toString()) }

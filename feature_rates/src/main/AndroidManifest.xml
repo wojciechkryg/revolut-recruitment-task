@@ -2,8 +2,6 @@
     package="com.wojdor.feature_rates">
 
     <application>
-        <activity
-            android:name=".view.RatesActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".view.RatesActivity" />
     </application>
 </manifest>
