@@ -255,9 +255,10 @@ class CurrencyEditText(
         input: String,
         inputFormatted: String,
         lastSelectionEnd: Int
-    ) = lastSelectionEnd == input.length
-            || lastSelectionEnd == inputFormatted.length
-            || lastSelectionEnd > inputFormatted.length
+    ) =
+        lastSelectionEnd == input.length
+                || lastSelectionEnd == inputFormatted.length
+                || lastSelectionEnd > inputFormatted.length
 
     private fun isInputNotFormatted(inputFormatted: String, input: String) =
         if (input.contains(separator)) {
