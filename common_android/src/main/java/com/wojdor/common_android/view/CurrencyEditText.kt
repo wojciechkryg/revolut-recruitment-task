@@ -192,24 +192,35 @@ class CurrencyEditText(
         val inputFormatted = input.formatToTwoDecimalPlacesString()
         if (isInputNotFormatted(inputFormatted, input)) {
             applyFormattedText(
+                input,
                 inputFormatted,
                 position,
                 changeCountBeforePosition,
                 changeCountAfterPosition
             )
-            restoreSelection(inputFormatted, input, lastSelectionStart, lastSelectionEnd)
+            restoreSelection(
+                inputFormatted,
+                input,
+                position,
+                changeCountBeforePosition,
+                changeCountAfterPosition,
+                lastSelectionStart,
+                lastSelectionEnd
+            )
         } else {
             onUserInput(input.toBigDecimal())
         }
     }
 
     private fun applyFormattedText(
+        input: String,
         inputFormatted: String,
         position: Int,
         changeCountBeforePosition: Int,
         changeCountAfterPosition: Int
     ) {
         if (isSpaceDeleted(
+                input,
                 inputFormatted,
                 position,
                 changeCountBeforePosition,
@@ -226,6 +237,7 @@ class CurrencyEditText(
     }
 
     private fun isSpaceDeleted(
+        input: String,
         inputFormatted: String,
         position: Int,
         changeCountBeforePosition: Int,
@@ -235,30 +247,51 @@ class CurrencyEditText(
                 && changeCountAfterPosition == NO_CHANGES
                 && inputFormatted.length > position
                 && inputFormatted[position] == Char.nonBreakingSpace
+                && input.count { it == Char.nonBreakingSpace } < inputFormatted.count { it == Char.nonBreakingSpace }
 
     private fun restoreSelection(
         inputFormatted: String,
         input: String,
+        position: Int,
+        changeCountBeforePosition: Int,
+        changeCountAfterPosition: Int,
         lastSelectionStart: Int,
         lastSelectionEnd: Int
     ) {
-        // TODO: Selection not working properly
         when {
-            shouldSetSelectionOnEnd(input, inputFormatted, lastSelectionEnd) -> setSelection(
-                inputFormatted.length
-            )
+            shouldSetSelectionOnEnd(input, inputFormatted, lastSelectionEnd) ->
+                setSelection(inputFormatted.length)
+            isSpaceDeleted(
+                input,
+                inputFormatted,
+                position,
+                changeCountBeforePosition,
+                changeCountAfterPosition
+            ) -> setSelection(lastSelectionStart - ONE_CHANGE)
+            inputFormatted.length > input.length ->
+                setSelection(lastSelectionStart + inputFormatted.length - input.length)
+            hasInputMoreLengthThanInputFormattedAndSelectionIsNotOnSpace(
+                input,
+                inputFormatted,
+                lastSelectionStart
+            ) -> setSelection(lastSelectionStart - input.length + inputFormatted.length)
             else -> setSelection(lastSelectionStart)
         }
     }
+
+    private fun hasInputMoreLengthThanInputFormattedAndSelectionIsNotOnSpace(
+        input: String,
+        inputFormatted: String,
+        lastSelectionStart: Int
+    ) =
+        input.length > inputFormatted.length && input[lastSelectionStart] != Char.nonBreakingSpace
 
     private fun shouldSetSelectionOnEnd(
         input: String,
         inputFormatted: String,
         lastSelectionEnd: Int
     ) =
-        lastSelectionEnd == input.length
-                || lastSelectionEnd == inputFormatted.length
-                || lastSelectionEnd > inputFormatted.length
+        lastSelectionEnd == input.length || lastSelectionEnd > inputFormatted.length
 
     private fun isInputNotFormatted(inputFormatted: String, input: String) =
         if (input.contains(separator)) {
