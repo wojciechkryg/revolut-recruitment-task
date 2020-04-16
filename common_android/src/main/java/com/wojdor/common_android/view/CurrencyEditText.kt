@@ -143,6 +143,8 @@ class CurrencyEditText(
         when {
             hasWrongSeparator(input) -> applyProperSeparator(input)
             isSeparatorFirst(input) -> addZeroAsPrefix(input)
+            isInputTooLong(input.formatToTwoDecimalPlacesString()) ->
+                setProperTextLengthWithoutSeparator()
             else -> formatInput(
                 input,
                 position,
@@ -313,15 +315,15 @@ class CurrencyEditText(
     override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect)
         if (focused) {
-            setProperTextLengthOnFocus()
+            setProperTextLengthWithoutSeparator()
             showKeyboard()
         } else {
             hideKeyboard()
         }
     }
 
-    private fun setProperTextLengthOnFocus() {
-        val input = text.toString()
+    private fun setProperTextLengthWithoutSeparator() {
+        val input = text.toString().formatToTwoDecimalPlacesString()
         if (isInputTooLong(input)) {
             setTextAndSelection(input.substringTo(MAX_LENGTH_WITHOUT_SEPARATOR))
         } else {
