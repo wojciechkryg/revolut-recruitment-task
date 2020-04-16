@@ -1,0 +1,64 @@
+import com.wojdor.buildsrc.Application
+import com.wojdor.buildsrc.Dimension
+import com.wojdor.buildsrc.Library
+import com.wojdor.buildsrc.Module
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Application.compileSdk
+    buildToolsVersion Application.buildTools
+    defaultConfig {
+        minSdkVersion Application.minSdk
+        targetSdkVersion Application.targetSdk
+        versionCode Application.versionCode
+        versionName Application.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions Dimension.dataSource
+    productFlavors {
+        dataMock {
+            dimension Dimension.dataSource
+        }
+        dataDevelop {
+            dimension Dimension.dataSource
+        }
+        dataTest {
+            dimension Dimension.dataSource
+        }
+        dataProduction {
+            dimension Dimension.dataSource
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Library.Android.appcompat
+    implementation Library.Android.core
+    implementation Library.Android.constraintLayout
+    implementation Library.Android.recyclerView
+    implementation Library.koin
+    implementation Library.kotlin
+    implementation Library.rxAndroid
+    implementation Library.rxKotlin
+    testImplementation Library.Test.junit
+    testImplementation Library.Test.mockk
+    implementation project(path: Module.common)
+    implementation project(path: Module.commonAndroid)
+    implementation project(path: Module.config)
+    implementation project(path: Module.domain)
+    implementation project(path: Module.network)
+    implementation project(path: Module.repositoryRates)
+    implementation project(path: Module.usecaseRates)
+}

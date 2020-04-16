@@ -1,0 +1,5 @@
+<resources>
+    <string name="rates">Rates</string>
+    <string name="currency_icon_description">Currency flag</string>
+    <string name="error_no_data">An error occurred!\nPlease try again later.</string>
+</resources>

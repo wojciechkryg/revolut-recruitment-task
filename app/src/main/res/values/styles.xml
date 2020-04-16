@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarStyle">@style/BaseActionBarStyle</item>
+    </style>
+
+    <style name="BaseActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="contentInsetStart">@dimen/actionBarContentInsetStart</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rate_currency_flag_size">40dp</dimen>
+    <dimen name="rate_currency_rate_min_width">40dp</dimen>
+</resources>

@@ -1,0 +1,37 @@
+import com.wojdor.buildsrc.Version
+import com.wojdor.buildsrc.Library
+
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Library.kotlin
+    implementation Library.rxKotlin
+    testImplementation Library.Test.junit
+    testImplementation Library.Test.mockk
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
+    }
+}
+repositories {
+    mavenCentral()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
